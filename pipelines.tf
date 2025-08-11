@@ -9,14 +9,9 @@ resource "azuredevops_variable_group" "shared_pipeline_variables" {
   description  = "Shared pipeline variables for api keys f.x"
   allow_access = true
 
-  variable {
-    name      = "arrow_api_key"
-    is_secret = true
-  }
-
-  variable {
-    name      = "netbox_api_token"
-    is_secret = true
+  variable { # dummy variable, api won't allow empty variable groups
+    name  = "example"
+    value = "example"
   }
 
 }
