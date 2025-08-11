@@ -58,6 +58,11 @@ variable "subscription_id" {
   description = "Subscription ID"
 }
 
+variable "subscription_name" {
+  type        = string
+  description = "Subscription Name"
+}
+
 variable "client_id" {
   type        = string
   description = "Client ID for backend service connection principal"
