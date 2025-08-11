@@ -64,7 +64,7 @@ resource "azuredevops_git_repository_file" "subscription_vending_pipeline_yml" {
                 - main
             paths:
                 include:
-                - ${each.key}/terraform/*
+                - subscription-vending/${each.key}/terraform/*
 
             extends:
             template: /pipeline-templates/ado-main-pipeline.yml
