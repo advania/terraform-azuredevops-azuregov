@@ -55,6 +55,7 @@ resource "azuredevops_git_repository_file" "workload_pipeline_yml" {
 resource "azuredevops_git_repository_file" "subscription_vending_pipeline_yml" {
   for_each            = var.subscription_vending_map
   repository_id       = azuredevops_git_repository.infra.id
+  branch              = "refs/heads/main"
   file                = "subscription-vending/${each.key}/pipeline/vending-${each.key}.yml"
   overwrite_on_create = true
   content             = <<-EOT
