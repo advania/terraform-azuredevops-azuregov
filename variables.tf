@@ -21,7 +21,7 @@ variable "pipeline_approval_team_name" {
 variable "components" {
   type        = list(string)
   description = "List of components to deploy"
-  default     = ["landing-zones", "monitoring", "networking", "subscription-vending", "policies", "azure-devops"]
+  default     = ["landing-zones", "monitoring", "networking", "policies", "azure-devops"]
 }
 
 variable "min_reviewers_enabled" {
