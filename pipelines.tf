@@ -69,13 +69,13 @@ resource "azuredevops_git_repository_file" "subscription_vending_pipeline_yml" {
                 - main
             paths:
                 include:
-                - ${each.value}/terraform/*
+                - ${each.key}/terraform/*
 
             extends:
             template: /pipeline-templates/ado-main-pipeline.yml
             parameters:
-                workingDirectory: "$(System.DefaultWorkingDirectory)/${each.value}/terraform"
-                backendAzureRmKey: "${each.value}.tfstate"
+                workingDirectory: "$(System.DefaultWorkingDirectory)/${each.key}/terraform"
+                backendAzureRmKey: "${each.key}.tfstate"
                 backendAzureRmContainerName: "tfstate"
                 backendServiceArm: "SC-${var.project_name}-OIDC"
                 backendAzureRmStorageAccountName: "${var.backend_storage_account_name}"
