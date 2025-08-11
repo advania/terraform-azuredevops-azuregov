@@ -16,15 +16,6 @@ variable "pipeline_approval_team_name" {
   default     = "Azure Governance Team"
 }
 
-variable "backend_storage_account_name" {
-  type        = string
-  description = "Name of the backend storage account"
-}
-
-variable "backend_resource_group_name" {
-  type        = string
-  description = "Name of the backend resource group"
-}
 
 
 variable "components" {
