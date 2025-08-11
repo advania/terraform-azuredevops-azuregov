@@ -1,9 +1,15 @@
 # Local .terraform directories
 .terraform/
 
+
+
 # .tfstate files
 *.tfstate
 *.tfstate.*
+
+# Exclude testing folder and pipeline templates
+testing/
+pipeline-templates/
 
 # Crash log files
 crash.log
