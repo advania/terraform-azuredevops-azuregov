@@ -20,7 +20,7 @@ resource "azuredevops_git_repository" "infra" {
 
 #Min reviewers branch policy
 resource "azuredevops_branch_policy_min_reviewers" "this" {
-  project_id = data.azuredevops_project.project_iac.id
+  project_id = resource.azuredevops_project.this.id
 
   enabled  = var.min_reviewers_enabled
   blocking = true
