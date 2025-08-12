@@ -1,7 +1,3 @@
-locals {
-  # Common components.These components have seperate state files and pipelines # can add more components in var.components
-  components = toset(var.components)
-}
 
 resource "azuredevops_variable_group" "shared_pipeline_variables" {
   project_id   = azuredevops_project.this.id
