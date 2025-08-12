@@ -75,6 +75,43 @@ resource "azuredevops_git_repository_file" "subscription_vending_pipeline_yml" {
             EOT
 }
 
+resource "azuredevops_git_repository_file" "subscription_vending_tf_template" {
+  for_each            = var.subscription_vending_map
+  repository_id       = azuredevops_git_repository.infra.id
+  branch              = "refs/heads/main"
+  file                = "subscription-vending/${each.key}/terraform/main.tf"
+  overwrite_on_create = true
+  content             = <<-EOT
+         terraform {
+  backend "azurerm" {
+    use_azuread_auth = true
+  }
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "~> 4.0"
+    }
+    azapi = {
+      source  = "Azure/azapi"
+      version = "~> 2.0"
+    }
+  }
+}
+
+provider "azurerm" {
+  features {}
+}
+
+provider "azapi" {}
+
+
+
+module "subscription_vending" {
+  source                      = "git::https://github.com/advania/terraform-azurerm-azgov-subscription-vending?ref=main"
+}
+            EOT
+}
+
 
 #Create pipeline objectfor each workload
 
