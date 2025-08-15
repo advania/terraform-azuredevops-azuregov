@@ -19,31 +19,30 @@ resource "azuredevops_git_repository_file" "workload_pipeline_yml" {
   file                = "${each.value}/pipeline/${each.value}.yml"
   overwrite_on_create = true
   content             = <<-EOT
-            trigger:
-            branches:
-                include:
-                - main
-            paths:
-                include:
-                - ${each.value}/terraform/*
+trigger:
+  branches:
+    include:
+    - main
+  paths:
+    include:
+    - ${each.value}/terraform/*
 
-            resources:
-            repositories:
-                - repository: pipeline-templates
-                type: github
-                name: advania/template-azuredevops-pipeline-templates
+resources:
+  repositories:
+  - repository: pipeline-templates
+    type: github
+    name: advania/template-azuredevops-pipeline-templates
 
-
-            extends:
-            template: ado-main-pipeline.yml@pipeline-templates
-            parameters:
-                workingDirectory: "$(System.DefaultWorkingDirectory)/${each.value}/terraform"
-                backendAzureRmKey: "${each.value}.tfstate"
-                backendAzureRmContainerName: "tfstate"
-                backendServiceArm: "SC-AzureGovernance-OIDC"
-                backendAzureRmStorageAccountName: "${var.backend_storage_account_name}"
-                backendAzureRmResourceGroupName: "${var.backend_resource_group_name}"
-            EOT
+extends:
+  template: ado-main-pipeline.yml@pipeline-templates
+  parameters:
+    workingDirectory: "$(System.DefaultWorkingDirectory)/${each.value}/terraform"
+    backendAzureRmKey: "${each.value}.tfstate"
+    backendAzureRmContainerName: "tfstate"
+    backendServiceArm: "SC-AzureGovernance-OIDC"
+    backendAzureRmStorageAccountName: "${var.backend_storage_account_name}"
+    backendAzureRmResourceGroupName: "${var.backend_resource_group_name}"
+EOT
 
   branch         = "refs/heads/main"
   commit_message = "init component deployment pipelines"
@@ -62,30 +61,30 @@ resource "azuredevops_git_repository_file" "subscription_vending_pipeline_yml" {
   file                = "subscription-vending/${each.key}/pipeline/vending-${each.key}.yml"
   overwrite_on_create = true
   content             = <<-EOT
-            trigger:
-            branches:
-                include:
-                - main
-            paths:
-                include:
-                - subscription-vending/${each.key}/terraform/*
+trigger:
+  branches:
+    include:
+    - main
+  paths:
+    include:
+    - subscription-vending/${each.key}/terraform/*
 
-            resources:
-            repositories:
-                - repository: pipeline-templates
-                type: github
-                name: advania/template-azuredevops-pipeline-templates
+resources:
+  repositories:
+  - repository: pipeline-templates
+    type: github
+    name: advania/template-azuredevops-pipeline-templates
 
-            extends:
-            template: ado-main-pipeline.yml@pipeline-templates
-            parameters:
-                workingDirectory: "$(System.DefaultWorkingDirectory)/${each.key}/terraform"
-                backendAzureRmKey: "subscription-vending-${each.key}.tfstate"
-                backendAzureRmContainerName: "tfstate"
-                backendServiceArm: "SC-AzureGovernance-OIDC"
-                backendAzureRmStorageAccountName: "${var.backend_storage_account_name}"
-                backendAzureRmResourceGroupName: "${var.backend_resource_group_name}"
-            EOT
+extends:
+  template: ado-main-pipeline.yml@pipeline-templates
+  parameters:
+    workingDirectory: "$(System.DefaultWorkingDirectory)/subscription-vending/${each.key}/terraform"
+    backendAzureRmKey: "subscription-vending-${each.key}.tfstate"
+    backendAzureRmContainerName: "tfstate"
+    backendServiceArm: "SC-AzureGovernance-OIDC"
+    backendAzureRmStorageAccountName: "${var.backend_storage_account_name}"
+    backendAzureRmResourceGroupName: "${var.backend_resource_group_name}"
+EOT
 }
 
 resource "azuredevops_git_repository_file" "subscription_vending_tf_template" {
