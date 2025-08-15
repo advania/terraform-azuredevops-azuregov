@@ -74,6 +74,7 @@ resource "azuredevops_git_repository_file" "subscription_vending_pipeline_yml" {
                 - repository: pipeline-templates
                 type: git
                 name: advania/template-azuredevops-pipeline-templates
+                type: git
 
             extends:
             template: ado-main-pipeline.yml@pipeline-templates
