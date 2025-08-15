@@ -30,8 +30,9 @@ resource "azuredevops_git_repository_file" "workload_pipeline_yml" {
             resources:
             repositories:
                 - repository: pipeline-templates
-                type: git
+                type: github
                 name: advania/template-azuredevops-pipeline-templates
+
 
             extends:
             template: ado-main-pipeline.yml@pipeline-templates
@@ -72,9 +73,8 @@ resource "azuredevops_git_repository_file" "subscription_vending_pipeline_yml" {
             resources:
             repositories:
                 - repository: pipeline-templates
-                type: git
+                type: github
                 name: advania/template-azuredevops-pipeline-templates
-                type: git
 
             extends:
             template: ado-main-pipeline.yml@pipeline-templates
