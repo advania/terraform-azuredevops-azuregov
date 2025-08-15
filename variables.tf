@@ -77,4 +77,15 @@ variable "subscription_vending_map" {
 }
 
 
+variable "github_service_connection_name" {
+  type        = string
+  description = "Name of the GitHub service connection to connect to pipeline templates repository"
+  default     = "SC-Github-PAT"
+}
 
+
+variable "github_pat" {
+  type        = string
+  sensitive   = true
+  description = "GitHub Personal Access Token to connect to pipeline templates repository"
+}

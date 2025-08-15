@@ -32,6 +32,7 @@ resources:
   - repository: pipeline-templates
     type: github
     name: advania/template-azuredevops-pipeline-templates
+    endpoint: ${var.github_service_connection_name}
 
 extends:
   template: ado-main-pipeline.yml@pipeline-templates
@@ -74,6 +75,7 @@ resources:
   - repository: pipeline-templates
     type: github
     name: advania/template-azuredevops-pipeline-templates
+    endpoint: ${var.github_service_connection_name}
 
 extends:
   template: ado-main-pipeline.yml@pipeline-templates

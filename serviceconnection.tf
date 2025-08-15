@@ -1,6 +1,6 @@
 
 resource "azuredevops_serviceendpoint_azurerm" "this" {
-  service_endpoint_name                  = "SC-${var.project_name}-OIDC"
+  service_endpoint_name                  = "SC-AzureGovernance-OIDC"
   project_id                             = azuredevops_project.this.id
   description                            = "Azure Governance Service Connection"
   service_endpoint_authentication_scheme = "WorkloadIdentityFederation"
@@ -16,3 +16,14 @@ resource "azuredevops_serviceendpoint_azurerm" "this" {
     ignore_changes = [environment]
   }
 }
+
+resource "azuredevops_serviceendpoint_github" "this" {
+  service_endpoint_name = var.github_service_connection_name
+  project_id            = azuredevops_project.this.id
+  description           = "GitHub Service Connection"
+  auth_personal {
+    personal_access_token = var.github_pat
+  }
+}
+
+
