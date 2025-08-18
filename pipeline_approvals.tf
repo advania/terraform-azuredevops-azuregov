@@ -7,8 +7,7 @@ resource "azuredevops_environment" "prod" {
 
 
 data "azuredevops_group" "project_build_service_accounts" {
-  project_id = azuredevops_project.this.id
-  name       = "Project Collection Build Service Accounts"
+  name = "Project Collection Build Service Accounts"
 }
 
 resource "azuredevops_git_permissions" "repo_push" {
