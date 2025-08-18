@@ -170,8 +170,9 @@ resource "azuredevops_build_definition" "sync-ado-templates" {
   path       = "\\ado-pipeline-templates"
 
   repository {
-    repo_type = "TfsGit"
-    repo_id   = azuredevops_git_repository.ado-pipeline-templates.id
-    yml_path  = "sync-ado-templates.yml"
+    repo_type   = "TfsGit"
+    repo_id     = azuredevops_git_repository.ado-pipeline-templates.id
+    branch_name = "refs/heads/main"
+    yml_path    = "sync-ado-templates.yml"
   }
 }
