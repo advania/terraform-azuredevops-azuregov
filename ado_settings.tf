@@ -12,7 +12,7 @@ data "azuredevops_group" "project_build_service_accounts" {
 
 resource "azuredevops_git_permissions" "repo_push" {
   project_id    = azuredevops_project.this.id
-  repository_id = azuredevops_git_repository.infra.id # or omit for project-level
+  repository_id = azuredevops_git_repository.ado-pipeline-templates.id
 
   principal = data.azuredevops_group.project_build_service_accounts.descriptor
 
