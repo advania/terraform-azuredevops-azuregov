@@ -30,10 +30,9 @@ trigger:
 resources:
   repositories:
   - repository: pipeline-templates
-    type: github
-    name: advania/template-azuredevops-pipeline-templates
-    endpoint: ${var.github_service_connection_name}
-
+    type: git
+    name: ado-pipeline-templates
+    
 extends:
   template: ado-main-pipeline.yml@pipeline-templates
   parameters:
@@ -73,9 +72,9 @@ trigger:
 resources:
   repositories:
   - repository: pipeline-templates
-    type: github
-    name: advania/template-azuredevops-pipeline-templates
-    endpoint: ${var.github_service_connection_name}
+    type: git
+    name: ado-pipeline-templates
+  
 
 extends:
   template: ado-main-pipeline.yml@pipeline-templates

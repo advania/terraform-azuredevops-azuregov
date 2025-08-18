@@ -17,13 +17,6 @@ resource "azuredevops_serviceendpoint_azurerm" "this" {
   }
 }
 
-resource "azuredevops_serviceendpoint_github" "this" {
-  service_endpoint_name = var.github_service_connection_name
-  project_id            = azuredevops_project.this.id
-  description           = "GitHub Service Connection"
-  auth_personal {
-    personal_access_token = var.github_pat
-  }
-}
+
 
 
