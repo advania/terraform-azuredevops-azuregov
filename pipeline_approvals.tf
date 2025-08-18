@@ -6,6 +6,25 @@ resource "azuredevops_environment" "prod" {
 }
 
 
+data "azuredevops_group" "project_build_service_accounts" {
+  project_id = azuredevops_project.this.id
+  name       = "Project Collection Build Service Accounts"
+}
+
+resource "azuredevops_git_permissions" "repo_push" {
+  project_id    = azuredevops_project.this.id
+  repository_id = azuredevops_git_repository.infra.id # or omit for project-level
+
+  principal = data.azuredevops_group.project_build_service_accounts.descriptor
+
+  permissions = {
+    PolicyExempt            = "Allow"
+    PullRequestBypassPolicy = "Allow"
+    GenericContribute       = "Allow"
+    CreateBranch            = "Allow"
+    CreateTag               = "Allow"
+  }
+}
 
 
 /*
@@ -28,21 +47,5 @@ resource "azuredevops_check_approval" "env_prod_approval" {
 
 
  Get the Project Collection Build Service account
-data "azuredevops_group" "build_service" {
-  project_id = azuredevops_project.this.id
-  name       = "Project Collection Build Service Accounts"
-}
 
-#allow the service connection to be exempt from branch protection to push files to customer repositories (pipeline yml files)
-resource "azuredevops_git_permissions" "exempt_from_branch_protection" {
-  project_id = azuredevops_project.this.id
-  principal  = data.azuredevops_group.build_service.descriptor
-  permissions = {
-    PolicyExempt            = "Allow"
-    PullRequestBypassPolicy = "Allow"
-    GenericContribute       = "Allow"
-    CreateBranch            = "Allow"
-    CreateTag               = "Allow"
-  }
-}
 */

@@ -163,3 +163,16 @@ resource "azuredevops_build_definition" "subscription_vending_pipelines" {
   }
 
 }
+
+
+resource "azuredevops_build_definition" "sync-ado-templates" {
+  project_id = azuredevops_project.this.id
+  name       = "Sync-ADO-Templates"
+  path       = "\\ado-pipeline-templates"
+
+  repository {
+    repo_type = "TfsGit"
+    repo_id   = azuredevops_git_repository.ado_pipeline_templates.id
+    yml_path  = "sync-ado-templates.yml"
+  }
+}

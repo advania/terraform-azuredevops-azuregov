@@ -27,6 +27,17 @@ resource "azuredevops_git_repository" "infra" {
   depends_on = [time_sleep.wait_for_project]
 }
 
+resource "azuredevops_git_repository" "ado-pipeline-templates" {
+  project_id     = azuredevops_project.this.id
+  name           = "ado-pipeline-templates"
+  default_branch = "refs/heads/main"
+  initialization {
+    init_type   = "Import"
+    source_type = "Git"
+    source_url  = "https://github.com/advania/template-azuredevops-pipeline-templates"
+  }
+  depends_on = [time_sleep.wait_for_project]
+}
 
 
 #Min reviewers branch policy
